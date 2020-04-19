@@ -1,1 +1,9 @@
-# erl-utility
+utility
+=====
+
+An OTP library
+
+Build
+-----
+
+    $ rebar3 compile
