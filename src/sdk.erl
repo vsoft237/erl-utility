@@ -9,8 +9,6 @@
 -module(sdk).
 -author("ysx").
 
--include("logger.hrl").
-
 %% API
 -export([http/3]).
 
@@ -58,8 +56,6 @@ http_post(Url, Body) ->
 http_post_json(Url, Body) ->
     Headers = [{"content-type", "ext/xml;charset=utf-8"}],
     ContentType = "application/json;charset=utf-8",
-    ?DEBUG("ContentType:~p", [ContentType]),
-    ?DEBUG("Body:~ts", [Body]),
     httpc:request(post, {Url, Headers, ContentType, Body}, [{timeout, 5000}], []).
 
 format_val(Val) when is_list(Val) ->
