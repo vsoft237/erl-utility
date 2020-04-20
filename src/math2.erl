@@ -77,7 +77,7 @@ any_to_num(Any) ->
 
 
 
-
+%% haha
 float_to_string(Value, Decimals) when is_integer(Value) ->
 	float_to_list(Value/1, [{decimals, Decimals}]);
 float_to_string(Value, Decimals) when is_float(Value) ->
