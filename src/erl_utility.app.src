@@ -9,6 +9,6 @@
   {env,[]},
   {modules, []},
 
-  {licenses, ["MIT"]},
-  {links, [{"github", "https://github.com/arthasyou/erl-utility"}]}
+  {licenses, ["MIT"]}
+%%  {links, [{"github", "https://github.com/arthasyou/erl-utility"}]}
  ]}.
