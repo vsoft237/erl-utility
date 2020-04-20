@@ -36,6 +36,7 @@ start_link() ->
 -spec beam_file() -> list().
 beam_file() ->
     {ok, Dir} = file:get_cwd(),
+    lager:error("DIR:~p", [Dir]),
     case file:list_dir(Dir ++ "/_build/default/lib/eos/ebin") of
         {ok, FList} ->
             do_beam_file(FList, []);
