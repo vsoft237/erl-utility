@@ -140,7 +140,7 @@ do_beam_hash([N | T], List) ->
     {ok, Dir} = file:get_cwd(),
     L = case beam_lib:md5(Dir ++ "/_build/default/lib/eos/ebin/" ++ N) of
         {ok, {M, Md5}} ->
-            [{M, u_md5:encode(Md5)} | List];
+            [{M, uu_md5:encode(Md5)} | List];
         _Err ->
             List
     end,
