@@ -1,4 +1,4 @@
-{application, erl-utility,
+{application, erl_utility,
  [{description, "An OTP library"},
   {vsn, "0.1.2"},
   {registered, []},
