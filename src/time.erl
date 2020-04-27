@@ -97,12 +97,16 @@ get_localtime_string() ->
 	{{Year, Month, Day}, {Hour, Minute, Second}} = time:get_localtime(),
 	lists:flatten(io_lib:format("~4..0w-~2..0w-~2..0w ~2..0w:~2..0w:~2..0w",[Year, Month, Day, Hour, Minute, Second])).
 
+seconds_to_binary(undefined) -> <<"NULL">>;
+seconds_to_binary(null) -> <<"NULL">>;
 seconds_to_binary({{Year, Month, Day}, {Hour, Minute, Second}}) ->
 	%% DATETIME
 	%% 一个日期和时间组合。支持的范围是'1000-01-01 00:00:00'到'9999-12-31 23:59:59'。MySQL以'YYYY-MM-DD HH:MM:SS'格式来显示DATETIME值，
 	%% 但是允许你使用字符串或数字把值赋给DATETIME的列。
 	list_to_binary(lists:flatten(io_lib:format("~4..0w-~2..0w-~2..0w ~2..0w:~2..0w:~2..0w",[Year, Month, Day, Hour, Minute, Second]))).
 
+seconds_to_string(undefined) -> <<"NULL">>;
+seconds_to_string(null) -> <<"NULL">>;
 seconds_to_string({{Year, Month, Day}, {Hour, Minute, Second}}) ->
 	%% DATETIME
 	%% 一个日期和时间组合。支持的范围是'1000-01-01 00:00:00'到'9999-12-31 23:59:59'。MySQL以'YYYY-MM-DD HH:MM:SS'格式来显示DATETIME值，
