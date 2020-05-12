@@ -71,8 +71,8 @@ any_to_num(Integer) when is_integer(Integer) ->
 	Integer;
 any_to_num(Float) when is_float(Float) ->
 	Float;
-any_to_num(Any) ->
-	io:format("Any to num is error when Any is :~p~n", [Any]),
+any_to_num(_) ->
+%%	io:format("Any to num is error when Any is :~p~n", [Any]),
 	0.
 
 
