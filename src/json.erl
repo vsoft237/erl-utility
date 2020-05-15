@@ -21,7 +21,7 @@ decode(Json) ->
     case catch jsx:decode(Json, [return_maps]) of
         Map when is_map(Map) ->
             {ok, Map};
-        ErrorMsg ->
-            lager:info("json decode error with data :~p~n error msg :~p~n", [Json, ErrorMsg]),
+        _ErrorMsg ->
+            io:format("json decode error with data :~p~n", [Json]),
             {error, 1}
     end.

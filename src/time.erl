@@ -22,7 +22,7 @@
 		 get_weekday/0, get_localtime_raw_string/0, get_today_seconds/0
 		]).
 
--export([get_huobi_time/0]).
+-export([get_huobi_time/0, next_diff/1, next_diff/3]).
 
 %% 取得当前unix时间戳，精确到秒
 now() ->
@@ -177,3 +177,26 @@ get_today_seconds() ->
 %%	{TZ, _} = get_midnight_seconds(time:now()),
 %%	ok.
 
+
+%% @doc 取得当前距离指定时间下次到达时相差的秒数
+-spec next_diff(H, M, S) -> Seconds when
+	H :: 0..23,
+	M :: 0..59,
+	S :: 0..59,
+	Seconds :: pos_integer().
+next_diff(H, M, S) ->
+	Sec = H * 3600 + M * 60 + S,
+	next_diff(Sec).
+-spec next_diff(0..86400 | [0..86400]) -> Seconds::pos_integer().
+next_diff(L = [_ | _]) ->
+	lists:min([next_diff(Sec) || Sec <- L]);
+next_diff({H, M, S}) ->
+	next_diff(H, M, S);
+next_diff(Sec) ->
+	%% Now = datetime(),
+	%% next_diff(Sec, Now).
+	DaySec = calendar:time_to_seconds(time()),
+	case Sec > DaySec of
+		true -> Sec - DaySec;
+		false -> Sec + 86400 - DaySec
+	end.
