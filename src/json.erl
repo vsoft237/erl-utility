@@ -22,6 +22,5 @@ decode(Json) ->
         Map when is_map(Map) ->
             {ok, Map};
         _ErrorMsg ->
-            io:format("json decode error with data :~p~n", [Json]),
             {error, 1}
     end.
