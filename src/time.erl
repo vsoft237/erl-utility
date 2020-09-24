@@ -99,6 +99,7 @@ get_localtime_string() ->
 
 seconds_to_binary(undefined) -> <<"NULL">>;
 seconds_to_binary(null) -> <<"NULL">>;
+seconds_to_binary(<<>>) -> <<"NULL">>;
 seconds_to_binary({{Year, Month, Day}, {Hour, Minute, Second}}) ->
 	%% DATETIME
 	%% 一个日期和时间组合。支持的范围是'1000-01-01 00:00:00'到'9999-12-31 23:59:59'。MySQL以'YYYY-MM-DD HH:MM:SS'格式来显示DATETIME值，
@@ -107,6 +108,7 @@ seconds_to_binary({{Year, Month, Day}, {Hour, Minute, Second}}) ->
 
 seconds_to_string(undefined) -> <<"NULL">>;
 seconds_to_string(null) -> <<"NULL">>;
+seconds_to_string(<<>>) -> <<"NULL">>;
 seconds_to_string({{Year, Month, Day}, {Hour, Minute, Second}}) ->
 	%% DATETIME
 	%% 一个日期和时间组合。支持的范围是'1000-01-01 00:00:00'到'9999-12-31 23:59:59'。MySQL以'YYYY-MM-DD HH:MM:SS'格式来显示DATETIME值，
