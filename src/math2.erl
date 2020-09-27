@@ -54,10 +54,15 @@ any_to_num(<<>>) -> 0;
 any_to_num("") -> 0;
 any_to_num(Binary) when is_binary(Binary) ->
 	case catch binary_to_integer(Binary) of
-		R when is_integer(R) ->
-			R;
+		Int when is_integer(Int) ->
+			Int;
 		_ ->
-			binary_to_float(Binary)
+			case catch binary_to_float(Binary) of
+				Float when is_float(Float) ->
+					Float;
+				_ ->
+					string_to_num(binary_to_list(Binary))
+			end
 	end;
 
 any_to_num(String) when is_list(String) ->
@@ -65,7 +70,12 @@ any_to_num(String) when is_list(String) ->
 		R when is_integer(R) ->
 			R;
 		_ ->
-			list_to_float(String)
+			case catch list_to_float(String) of
+				Float when is_float(Float) ->
+					Float;
+				_ ->
+					string_to_num(String)
+			end
 	end;
 any_to_num(Integer) when is_integer(Integer) ->
 	Integer;
@@ -76,6 +86,16 @@ any_to_num(_) ->
 	0.
 
 
+string_to_num(Str) ->
+	{ok, Tokens, _} = erl_scan:string(Str),
+	case Tokens of
+		[{float, _, Float} | _] ->
+			Float;
+		[{integer, _, Int} | _] ->
+			Int;
+		_ ->
+			0
+	end.
 
 %% 浮点数转字符串 
 float_to_string(Value, Decimals) when is_integer(Value) ->
